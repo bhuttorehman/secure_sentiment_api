@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sentiment & Review Analyzer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result-card {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #eef9f1;
+            border: 1px solid #c8e6c9;
+            display: none;
+        }
+
+        .result-card h3 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: white;
+            background-color: #2196F3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>🤖 AI Review Analyzer</h2>
+
+        <div class="form-group">
+            <label for="name">User Name:</label>
+            <input type="text" id="name" placeholder="e.g. Rehman Bhutto" value="Rehman Bhutto">
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" placeholder="e.g. 22" value="22">
+        </div>
+
+        <div class="form-group">
+            <label for="review">Your Review / Feedback:</label>
+            <textarea id="review" rows="4"
+                placeholder="Write your review here...">This FastAPI and Gemini AI course is super fast and easy to understand!</textarea>
+        </div>
+
+        <button onclick="analyzeSentiment()">Analyze with Gemini AI</button>
+
+        <div id="result" class="result-card">
+            <h3 id="resUser"></h3>
+            <p><strong>Sentiment:</strong> <span id="resSentiment" class="badge"></span></p>
+            <p><strong>Confidence:</strong> <span id="resConfidence"></span></p>
+            <p><strong>AI Summary:</strong> <span id="resSummary"></span></p>
+        </div>
+    </div>
+
+    <script>
+        async function analyzeSentiment() {
+            const name = document.getElementById('name').value;
+            const age = parseInt(document.getElementById('age').value);
+            const review = document.getElementById('review').value;
+            const resultDiv = document.getElementById('result');
+
+            if (!name || !age || !review) {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            resultDiv.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/v1/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_name: name,
+                        user_age: age,
+                        review_text: review
+                    })
+                });
+
+                const data = await response.json();
+
+                document.getElementById('resUser').innerText = `Analysis for ${name} (${age} yrs):`;
+                document.getElementById('resSentiment').innerText = data.sentiment;
+                document.getElementById('resConfidence').innerText = `${(data.confidence * 100).toFixed(0)}%`;
+                document.getElementById('resSummary').innerText = data.summary;
+
+                resultDiv.style.display = 'block';
+
+            } catch (error) {
+                alert("Error connecting to server!");
+                console.error(error);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
