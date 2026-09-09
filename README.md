@@ -75,5 +75,5 @@ Client Setup: A .env.example file is included so clients can safely plug in thei
 👤 Author
 Abdul Rehman
 AI Solutions Engineer in Training
-GitHub: bhuttorehman
-LinkedIn: Abdul Rehman
+GitHub: [bhuttorehman](https://github.com/bhuttorehman)
+LinkedIn: [Abdul Rehman](https://www.linkedin.com/in/bhuttorehman)
