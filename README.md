@@ -54,28 +54,35 @@ Access interactive API documentation at: http://127.0.0.1:8000/docs
 POST /ask
 Analyzes review text and returns structured AI-grounded sentiment analysis.
 Sample Request Payload (JSON):
+```json
 {
   "prompt": "This product exceeded my expectations! The quality is amazing."
 }
+```
+
 Successful Response (200 OK):
+```json
 {
   "AI response": "Positive Sentiment: The review highlights high customer satisfaction with product quality and performance."
 }
-Handled Status Codes & Errors:
-200 OK: Request processed successfully.
-400 Bad Request: Raised when prompt is empty or contains only whitespace.
-{
-  "detail": "Prompt cannot be empty. Please provide review text."
-}
-422 Unprocessable Entity: Automatic Pydantic validation error for invalid data types.
-500 Internal Server Error: Catches upstream API exceptions or missing environment configurations.
-🔒 Security & Client Handover Rules
-Zero Credential Leaks: The .env file is excluded via .gitignore to protect production API credentials.
-Client Setup: A .env.example file is included so clients can safely plug in their own Gemini API keys upon deployment.
+```
+
+### Handled Status Codes & Errors:
+* **200 OK:** Request processed successfully.
+* **400 Bad Request:** Raised when prompt is empty or contains only whitespace.
+* **422 Unprocessable Entity:** Automatic Pydantic validation error for invalid data types.
+* **500 Internal Server Error:** Catches upstream API exceptions or missing environment configurations.
+
+### 🔒 Security & Client Handover Rules
+* **Zero Credential Leaks:** The `.env` file is excluded via `.gitignore` to protect production API credentials.
+* **Client Setup:** A `.env.example` file is included so clients can safely plug in their own Gemini API keys upon deployment.
+
+---
+
 ## 👤 Author
 
 **Abdul Rehman**  
 *AI Solutions Engineer in Training*
 
-GitHub: [https://github.com/bhuttorehman](https://github.com/bhuttorehman)
-LinkedIn: [https://www.linkedin.com/in/bhuttorehman](https://www.linkedin.com/in/bhuttorehman)
+* **GitHub:** [bhuttorehman](https://github.com/bhuttorehman)
+* **LinkedIn:** [Abdul Rehman](https://www.linkedin.com/in/bhuttorehman)
