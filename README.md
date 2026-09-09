@@ -72,5 +72,10 @@ Handled Status Codes & Errors:
 🔒 Security & Client Handover Rules
 Zero Credential Leaks: The .env file is excluded via .gitignore to protect production API credentials.
 Client Setup: A .env.example file is included so clients can safely plug in their own Gemini API keys upon deployment.
+## 👤 Author
+
+**Abdul Rehman**  
+*AI Solutions Engineer in Training*
+
 - **GitHub:** [bhuttorehman](https://github.com/bhuttorehman)
 - **LinkedIn:** [Abdul Rehman](https://www.linkedin.com/in/bhuttorehman)
